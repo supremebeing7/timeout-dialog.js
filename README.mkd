@@ -14,3 +14,24 @@ Credit
 
 timeout-dialog.js was developed by [@rigoneri]
 
+Usage
+-----
+
+In a Rails application, setup a route:
+
+    get 'prevent_timeout' => 'sessions#prevent_timeout'
+
+In the corresponding `prevent_timeout` action in `SessionsController`, reset the variable being used for the timeout counter. For example, with [Sorcery]() and the `session_timeout` submodule, you could do something like this:
+
+    def prevent_timeout
+      session[:last_action_time] = Time.now.in_time_zone if current_user
+      render nothing: true
+    end
+
+Finally, plug this in at the end of your `application.html.haml` but still inside the html tag:
+
+    - if current_user
+      :javascript
+        $.timeoutDialog();
+
+Good as gold!
