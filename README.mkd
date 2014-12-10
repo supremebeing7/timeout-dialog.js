@@ -21,7 +21,7 @@ In a Rails application, setup a route:
 
     get 'prevent_timeout' => 'sessions#prevent_timeout'
 
-In the corresponding `prevent_timeout` action in `SessionsController`, reset the variable being used for the timeout counter. For example, with [Sorcery]() and the `session_timeout` submodule, you could do something like this:
+In the corresponding `prevent_timeout` action in `SessionsController`, reset the variable being used for the timeout counter. For example, with [Sorcery](https://github.com/NoamB/sorcery) and the `session_timeout` submodule, you could do something like this:
 
     def prevent_timeout
       session[:last_action_time] = Time.now.in_time_zone if current_user
